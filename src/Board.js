@@ -79,13 +79,18 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      //get a particular row in the board
       var value = this.get(rowIndex);
       var counter = 0;
+      //loop through the row to get to the individual values
       for (var i = 0; i < value.length; i++) {
+        //check if the value is a one
         if (value[i] === 1 ) {
+          //if it is, add to the counter
           counter++;
         }
       } 
+      //if the counter is greater than one, we have a conflict
       if (counter > 1) {
         return true;
       }
@@ -95,12 +100,16 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      //we first get access to the whole matrix
       var board = this.rows();
+      //iterate through the board
       for (var i = 0; i < board.length; i++) {
+        //call the method of checking the rows on each row
         if (this.hasRowConflictAt(i)) {
           return true;
         }
       }
+      //return the answer to the user
       return false; // fixme
     },
 
@@ -111,15 +120,21 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      //we get the board
       var board = this.rows();
+      //create a counter
       var counter = 0;
+      //iterate through the board
       for ( var i = 0; i < board.length; i++) {
+        //compare the value at the same points in the column
         if (board[i][colIndex] === 1) {
+          //if found, add to the counter
           counter ++;
         }
       }
      
       if (counter > 1) {
+        //if our counter is more than one, we have a conflict
         return true;
       }
       return false; // fixme
@@ -127,9 +142,13 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      //get the size of the board
       var board = this.get('n');
+      //iterate as long as the size
       for (var i = 0; i < board; i++) {
+        //call the colConflicts method on each column in the board
         if ( this.hasColConflictAt(i)) {
+          //return the findings to the user
           return true;
         }
       }
@@ -143,19 +162,25 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      // var board = this.rows();
+      //get the size of the board
       var size = this.get('n');
+      //get the board
       var board = this.rows();
+      //create a counter
       var counter = 0;
-      var rowIndex = 0;
+      //set the column index as the input value
       var colIndex = majorDiagonalColumnIndexAtFirstRow;
-
+       //iterate through the board
       for ( var i = 0; i < size; i++) {
+        //check if the value is one 
         if (board[i][colIndex] === 1) {
+          //if it is add to the counter
           counter ++;
         }
+        //then we add one to the column index as we want to move diagonally
         colIndex++;
       }
+      //return the answer to the user
       if (counter > 1) {
         return true;
       }
